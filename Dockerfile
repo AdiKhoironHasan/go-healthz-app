@@ -4,6 +4,7 @@ ENV GO111MODULE=on
 WORKDIR /app
 
 RUN apk add --no-cache git tzdata
+RUN apk --no-cache add ca-certificates
 
 COPY go.mod go.sum ./
 RUN go mod download
