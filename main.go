@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"log"
 	"log/slog"
 	"net/http"
 	"time"
@@ -19,12 +18,12 @@ func init() {
 	viper.SetConfigFile(".env")
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Fatalf("Error reading .env file: %v", err)
+		slog.Error("Reading env from .env file failed, using os environment variables", "error", err)
+		viper.AutomaticEnv()
 	}
 }
 
 func main() {
-
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
